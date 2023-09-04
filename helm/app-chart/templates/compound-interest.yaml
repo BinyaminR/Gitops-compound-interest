@@ -1,0 +1,60 @@
+
+# templates/web-app.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-deployment
+  labels:
+    app: {{ .Values.compound-interest.labelapp }}
+spec:
+  replicas: {{ .Values.compound-interest.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.compound-interest.labelapp }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.compound-interest.labelapp }}
+    spec:
+      containers:
+      - name: webapp
+        image: {{ .Values.compound-interest.image }}
+        ports:
+        - containerPort: {{ .Values.compound-interest.containerPort }}
+        env:
+        - name: USER_NAME
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.mongoSecret.name }}
+              key: mongo-user
+        - name: USER_PWD
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.mongoSecret.name }}
+              key: mongo-password
+        - name: DB_URL
+          valueFrom:
+            configMapKeyRef:
+              name: {{ .Values.mongoConfig.name }}
+              key: mongo-url
+        - name: APP_DEBUG
+          valueFrom:
+            configMapKeyRef:
+              name: {{ .Values.mongoConfig.name }}
+              key: debug
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.compound-interest.service.name }}
+spec:
+  type: {{ .Values.compound-interest.service.type }}
+  selector:
+    app: {{ .Values.compound-interest.labelapp }}
+  ports:
+    - protocol: TCP
+      port: {{ .Values.compound-interest.service.port }}
+      targetPort: {{ .Values.compound-interest.service.port }}
+      nodePort: {{ .Values.compound-interest.service.nodePort }}
