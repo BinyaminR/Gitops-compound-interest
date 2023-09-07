@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: webapp
-        image: binyamin22/wc-flask-app:v1.3
+        image: binyamin22/compound-interest:v1.0.0
         ports:
         - containerPort: 5000
         env:

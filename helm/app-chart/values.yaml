@@ -5,7 +5,8 @@
 # values.yaml 
 
 mongodb:
-  image: mongo:5.0
+  image: mongo:7.0.1
+  # image: mongo:5.0
   labelapp: mongo
   replicas: 1
   containerPort: 27017
@@ -30,22 +31,22 @@ mongoExpress:
     type: LoadBalancer
     nodePort: 30000
 
-compound-interest:
-  image: TBD
+compoundInterest:
+  image: binyamin22/compound-interest:v1.0.0
   labelapp: cp
   replicas: 1
-  containerPort: 80
+  containerPort: 5000
   service:
     name: cp-service
     type: LoadBalancer
-    port: 80
+    port: 5000
     nodePort: 30100
 
 mongoConfig:
   name: mongo-config
   data:
     mongourl: mongo-service
-    debug: false
+    # debug: false
 
 mongoSecret:
   name: mongo-secret

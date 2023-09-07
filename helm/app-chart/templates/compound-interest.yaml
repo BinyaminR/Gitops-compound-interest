@@ -4,24 +4,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: webapp-deployment
+  name: cp-deployment
   labels:
-    app: {{ .Values.compound-interest.labelapp }}
+    app: {{ .Values.compoundInterest.labelapp }}
 spec:
-  replicas: {{ .Values.compound-interest.replicas }}
+  replicas: {{ .Values.compoundInterest.replicas }}
   selector:
     matchLabels:
-      app: {{ .Values.compound-interest.labelapp }}
+      app: {{ .Values.compoundInterest.labelapp }}
   template:
     metadata:
       labels:
-        app: {{ .Values.compound-interest.labelapp }}
+        app: {{ .Values.compoundInterest.labelapp }}
     spec:
       containers:
       - name: webapp
-        image: {{ .Values.compound-interest.image }}
+        image: {{ .Values.compoundInterest.image }}
         ports:
-        - containerPort: {{ .Values.compound-interest.containerPort }}
+        - containerPort: {{ .Values.compoundInterest.containerPort }}
         env:
         - name: USER_NAME
           valueFrom:
@@ -38,23 +38,23 @@ spec:
             configMapKeyRef:
               name: {{ .Values.mongoConfig.name }}
               key: mongo-url
-        - name: APP_DEBUG
-          valueFrom:
-            configMapKeyRef:
-              name: {{ .Values.mongoConfig.name }}
-              key: debug
+        # - name: APP_DEBUG
+        #   valueFrom:
+        #     configMapKeyRef:
+        #       name: {{ .Values.mongoConfig.name }}
+        #       key: debug
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.compound-interest.service.name }}
+  name: {{ .Values.compoundInterest.service.name }}
 spec:
-  type: {{ .Values.compound-interest.service.type }}
+  type: {{ .Values.compoundInterest.service.type }}
   selector:
-    app: {{ .Values.compound-interest.labelapp }}
+    app: {{ .Values.compoundInterest.labelapp }}
   ports:
     - protocol: TCP
-      port: {{ .Values.compound-interest.service.port }}
-      targetPort: {{ .Values.compound-interest.service.port }}
-      nodePort: {{ .Values.compound-interest.service.nodePort }}
+      port: {{ .Values.compoundInterest.service.port }}
+      targetPort: {{ .Values.compoundInterest.service.port }}
+      nodePort: {{ .Values.compoundInterest.service.nodePort }}
