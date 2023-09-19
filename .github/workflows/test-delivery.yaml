@@ -25,15 +25,15 @@ jobs:
     - name: Start minikube
       uses: medyagh/setup-minikube@master
       
-    - name: Try the cluster !
+    - name: View cluster
       run: kubectl get pods -A        
       
-    - name: Deploy to minikube
+    - name: Deploy minikube
       run: |
           helm install app helm/app-chart/
       
-    - name: Take a nap
+    - name: Wait for application to start
       run: sleep 30   
 
-    - name: Tast cluster
+    - name: Test connectivity
       run: ./helm/app-chart/test.sh
