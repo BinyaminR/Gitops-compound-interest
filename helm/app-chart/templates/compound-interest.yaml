@@ -23,26 +23,26 @@ spec:
         ports:
         - containerPort: {{ .Values.compoundInterest.containerPort }}
         env:
-        - name: USER_NAME
+        - name: MONGO_DB_USERNAME
           valueFrom:
             secretKeyRef:
               name: {{ .Values.mongoSecret.name }}
               key: mongo-user
-        - name: USER_PWD
+        - name: MONGO_DB_PASSWORD
           valueFrom:
             secretKeyRef:
               name: {{ .Values.mongoSecret.name }}
               key: mongo-password
-        - name: DB_URL
+        - name: HOST_NAME
           valueFrom:
             configMapKeyRef:
               name: {{ .Values.mongoConfig.name }}
               key: mongo-url
-        # - name: APP_DEBUG
-        #   valueFrom:
-        #     configMapKeyRef:
-        #       name: {{ .Values.mongoConfig.name }}
-        #       key: debug
+        - name: SECRET_KEY
+          valueFrom:
+            configMapKeyRef:
+              name: {{ .Values.mongoConfig.name }}
+              key: mongo-key
 
 ---
 apiVersion: v1

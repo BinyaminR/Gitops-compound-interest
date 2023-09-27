@@ -32,20 +32,21 @@ mongoExpress:
     nodePort: 30000
 
 compoundInterest:
-  image: binyamin22/compound-interest:v1.0.t
+  image: binyamin22/c-i-app:v1
   labelapp: cp
   replicas: 1
-  containerPort: 5000
+  containerPort: 8000
   service:
     name: cp-service
     type: LoadBalancer
-    port: 5000
+    port: 8000
     nodePort: 30100
 
 mongoConfig:
   name: mongo-config
   data:
     mongourl: mongo-service
+    mongokey: shT@bI3rU98RE7878
     # debug: false
 
 mongoSecret:

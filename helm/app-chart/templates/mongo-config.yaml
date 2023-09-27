@@ -5,4 +5,5 @@ metadata:
   name: {{ .Values.mongoConfig.name }}
 data:
   mongo-url: {{ .Values.mongoConfig.data.mongourl }}
+  mongo-key: {{ .Values.mongoConfig.data.mongokey }}
   # debug: {{ .Values.mongoConfig.data.debug }}
