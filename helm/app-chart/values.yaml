@@ -28,7 +28,7 @@ mongoExpress:
   service:
     name: mongo-express-service
     port: 8081
-    type: NodePort
+    type: LoadBalancer
     nodePort: 30000
 
 compoundInterest:
