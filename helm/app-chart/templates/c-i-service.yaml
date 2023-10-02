@@ -10,4 +10,4 @@ spec:
     - protocol: TCP
       port: {{ .Values.compoundInterest.service.port }}
       targetPort: {{ .Values.compoundInterest.service.port }}
-      nodePort: {{ .Values.compoundInterest.service.nodePort }}
+      # nodePort: {{ .Values.compoundInterest.service.nodePort }}

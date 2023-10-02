@@ -28,7 +28,7 @@ mongoExpress:
   service:
     name: mongo-express-service
     port: 8081
-    type: LoadBalancer
+    type: NodePort
     nodePort: 30000
 
 compoundInterest:
@@ -38,7 +38,7 @@ compoundInterest:
   containerPort: 8000
   service:
     name: cp-service
-    type: LoadBalancer
+    type: ClusterIP
     port: 8000
     nodePort: 30100
 
